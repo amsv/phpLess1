@@ -35,29 +35,20 @@
 </script>
 </head>
 <body>
-    <!--
-    <form action="" method="POST" enctype="multipart/form-data">
-        <span> <b>Добавить файл: </b> </span>
-        <input type="file" name="userfile">
-        <button type="submit" name="send">ЗАГРУЗИТЬ</button> <br>
-        <span><?=$message?></span>
-    </form>
-     -->
-    <!--https://webformyself.com/zagruzka-izobrazhenij-s-izmeneniem-razmera/-->
     <?
-        $sql = "select * from images where path='".DIR_PHOTO_BIG."' order by seen desc";
-        $res = mysqli_query($link, $sql) or die("Ошибка");
+    $sql = "select * from images where path='".DIR_PHOTO_BIG."' order by seen desc";
+    $res = mysqli_query($link, $sql) or die("Ошибка");
 
-        $i=0;
-        while ($data = mysqli_fetch_assoc($res)) :?>
-            <a rel="gallery" href="photo.php?id=<?=$data['id']?>&name=<?=$data['name']?>">
-                <img src="<?=DIR_PHOTO_SMALL.$data['name']?>" width="33%">
-            </a>
-            <? if( (++$i % 3) == 0)
-                echo "<br>";?>
+    $i=0;
+    while ($data = mysqli_fetch_assoc($res)) :?>
+        <a rel="gallery" href="photo.php?id=<?=$data['id']?>">
+            <img src="<?=DIR_PHOTO_SMALL.$data['name']?>" width="33%">
+        </a>
+    <? if( (++$i % 3) == 0)
+            echo "<br>";?>
 
-        <? endwhile; ?>
+    <? endwhile; ?>
 
-        <? mysqli_close($link);?>
+    <? mysqli_close($link);?>
 </body>
 </html>

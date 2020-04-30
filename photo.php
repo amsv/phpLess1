@@ -2,11 +2,9 @@
   include_once 'models/config.php';
 
   $id = $_GET['id'];
-  $name = $_GET['name'];
 
-  $sql = "select * from images where name='".$name."' and path='".DIR_PHOTO_BIG."'";
+  $sql = "select * from images where id=".$id;
   $res = mysqli_query($link, $sql) or die("Ошибка");
-
 
 ?>
 <!DOCTYPE html>
@@ -18,12 +16,10 @@
 <body>
   <a href="index.php"> Вернуться в галерею </a>
   <?
-
   while ($data = mysqli_fetch_assoc($res)) :?>
     <h2>Просмотров:     <?=$data['seen'];?></h2>
-    <div>
-      <img src="<?=$data['path'].$data['name'] ?>">
-    </div>
+    <img src="<?=$data['path'].$data['name'] ?>" width="100%vw">
+
     <?$sql = "UPDATE images SET seen=".($data['seen']+1)." WHERE id=".$data['id'];?>
   <?endwhile?>
   <?
