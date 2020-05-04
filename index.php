@@ -1,54 +1,44 @@
-
-<!--
-/1. Создать галерею фотографий. Она должна состоять из одной страницы, на которой пользователь видит все картинки в уменьшенном виде. При клике на фотографию она должна открыться в браузере в новой вкладке. Размер картинок можно ограничивать с помощью свойства width.
-2. *Строить фотогалерею, не указывая статичные ссылки к файлам, а просто передавая в функцию построения адрес папки с изображениями. Функция сама должна считать список файлов и построить фотогалерею со ссылками в ней.
-*/
--->
-<?
-    include_once 'models/config.php';
-    include_once 'models/loadImg.php';
-
-?>
-
-
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Урок фотогаллерея</title>
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-    <script type="text/javascript" src="scripts/jquery.js"></script>
-    <script type="text/javascript" src="scripts/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
-    <script type="text/javascript" src="scripts/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-    <link rel="stylesheet" type="text/css" href="scripts/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
-
-    <script type="text/javascript">
-	$(document).ready(function(){
-		$("a.photo").fancybox({
-			transitionIn: 'elastic',
-			transitionOut: 'elastic',
-			speedIn: 500,
-			speedOut: 500
-		});
- 	});
-</script>
+    <title>ДЗ №6</title>
+    <style>
+        ol, a {
+            font-size: 1.5rem;
+        }
+    </style>
 </head>
 <body>
-    <?
-    $sql = "select * from images where path='".DIR_PHOTO_BIG."' order by seen desc";
-    $res = mysqli_query($link, $sql) or die("Ошибка");
-
-    $i=0;
-    while ($data = mysqli_fetch_assoc($res)) :?>
-        <a rel="gallery" href="photo.php?id=<?=$data['id']?>">
-            <img src="<?=DIR_PHOTO_SMALL.$data['name']?>" width="33%">
+    <h1>Урок 6. Интерактивность: Методы передачи данных GET и POST, работа с формами и пользовательскими данными   </h1>
+<ol>
+    <li>
+        <a href="less6.1.php">
+        Создать форму-калькулятор операциями: сложение, вычитание, умножение, деление. Не забыть обработать деление на ноль! Выбор операции можно осуществлять с помощью тега select.
         </a>
-    <? if( (++$i % 3) == 0)
-            echo "<br>";?>
-
-    <? endwhile; ?>
-
-    <? mysqli_close($link);?>
+    </li>
+    <li>
+        <a href="less6.2.php">
+        Создать калькулятор, который будет определять тип выбранной пользователем операции, ориентируясь на нажатую кнопку.
+        </a>
+    </li>
+    <li>
+        <a href="less6.3.php">
+        Добавить функционал отзывов в имеющийся у вас проект
+        </a>
+    </li>
+    <li>
+        <a href="less6.4.php">
+        Создать страницу каталога товаров: товары хранятся в БД (структура прилагается);
+        страница формируется автоматически; по клику на товар открывается карточка товара с подробным описанием.    подумать, как лучше всего хранить изображения товаров.
+        </a>
+    </li>
+    <li>
+        <a href="less6.5.php">
+        *Написать CRUD-блок для управления выбранным модулем через единую функцию (doFeedbackAction())
+        </a>
+    </li>
+</ol>
 </body>
 </html>
